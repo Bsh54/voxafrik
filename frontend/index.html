@@ -197,112 +197,11 @@
 <div class="flex items-center justify-end pt-space-xs"><button id="inject-send" class="bg-primary-container hover:bg-surface-tint text-on-primary-container px-space-lg py-space-sm rounded font-label-lg text-label-lg font-bold flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">send</span>Inject into stream</button></div>
 </div></div><script>
 (function() {
-  // Realistic Multilingual African Stream Corpus
-  const MESSAGE_CORPUS = [
-    {
-      id: "msg-101",
-      dialect: "Nigerian Pidgin",
-      origin: "Lagos, NG",
-      text: "How body na, make we celebrate Super Eagles match today, di vibe dey high!",
-      translation: "How are you doing? Let us celebrate the Super Eagles match today, the vibe is energetic!",
-      isToxic: false,
-      latency: "0.039 ms",
-      confidence: "99.8%",
-      category: "NORMAL",
-      tokens: []
-    },
-    {
-      id: "msg-102",
-      dialect: "Swahili / Sheng",
-      origin: "Nairobi, KE",
-      text: "Hao watu wa kabila hiyo lazima tuwatupie <mark class='bg-error/30 text-error px-1 rounded font-bold'>mawe</mark> kabla kura haijaanza kesho!",
-      translation: "Those people of that tribe must have stones hurled at them before voting starts tomorrow!",
-      isToxic: true,
-      latency: "0.041 ms",
-      confidence: "99.6%",
-      category: "HATE",
-      tokens: [{ name: "kabila hiyo", w: "0.78" }, { name: "tuwatupie mawe", w: "0.96" }, { name: "kura kesho", w: "0.52" }]
-    },
-    {
-      id: "msg-103",
-      dialect: "Wolof",
-      origin: "Dakar, SN",
-      text: "Jamm rek lañu bëgg ci dëkk bi, ñun ñépp ay bokk lañu ci Senegal.",
-      translation: "Peace is all we want in this town; we are all brothers and sisters in Senegal.",
-      isToxic: false,
-      latency: "0.038 ms",
-      confidence: "99.7%",
-      category: "NORMAL",
-      tokens: []
-    },
-    {
-      id: "msg-104",
-      dialect: "French Argot / Nouchi",
-      origin: "Abidjan, CI",
-      text: "Les gbra de là-bas sont tous des <mark class='bg-error/30 text-error px-1 rounded font-bold'>voleurs étrangers</mark>, faut les chasser de Treichville!",
-      translation: "Those folks over there are all foreign thieves, we must chase them out of Treichville!",
-      isToxic: true,
-      latency: "0.040 ms",
-      confidence: "99.3%",
-      category: "HATE",
-      tokens: [{ name: "gbra de là-bas", w: "0.64" }, { name: "voleurs étrangers", w: "0.95" }, { name: "chasser", w: "0.88" }]
-    },
-    {
-      id: "msg-105",
-      dialect: "Amharic",
-      origin: "Addis Ababa, ET",
-      text: "ሰላም ለኢትዮጵያችን፣ ሁላችንም በአንድነት በፍቅር አብረን እንስራ።",
-      translation: "Peace for our Ethiopia; let us all work together in unity and love.",
-      isToxic: false,
-      latency: "0.042 ms",
-      confidence: "99.4%",
-      category: "NORMAL",
-      tokens: []
-    },
-    {
-      id: "msg-106",
-      dialect: "Lingala",
-      origin: "Kinshasa, CD",
-      text: "Bango nyonso bazali <mark class='bg-error/30 text-error px-1 rounded font-bold'>banyamulenge mabe</mark>, tokotika te bakota na mboka na biso!",
-      translation: "All of them are evil outsiders; we will not allow them into our community!",
-      isToxic: true,
-      latency: "0.037 ms",
-      confidence: "99.5%",
-      category: "HATE",
-      tokens: [{ name: "mabe", w: "0.82" }, { name: "banyamulenge", w: "0.91" }, { name: "tokotika te", w: "0.74" }]
-    },
-    {
-      id: "msg-107",
-      dialect: "Nigerian Pidgin",
-      origin: "Warri, NG",
-      text: "God bless our market women today, business go sweet well well for everybody.",
-      translation: "May God bless our market women today, commerce will flourish for everyone.",
-      isToxic: false,
-      latency: "0.038 ms",
-      confidence: "99.9%",
-      category: "NORMAL",
-      tokens: []
-    },
-    {
-      id: "msg-108",
-      dialect: "Swahili",
-      origin: "Dar es Salaam, TZ",
-      text: "Karibuni wote kwenye tamasha la muziki wa kiasili ufukweni leo jioni.",
-      translation: "Welcome all to the traditional indigenous music festival on the beach this evening.",
-      isToxic: false,
-      latency: "0.039 ms",
-      confidence: "99.9%",
-      category: "NORMAL",
-      tokens: []
-    }
-  ];
-
   // State
   let isStreamRunning = false;
   let streamSpeed = 1.0;
-  let totalScreened = 124892;
-  let flaggedViolations = 4188;
-  let cleanCounter = 120704;
+  let flaggedViolations = 0;
+  let cleanCounter = 0;
   let messageIndex = 0;
   let activeNodes = [];
   let batchSize = 200;
