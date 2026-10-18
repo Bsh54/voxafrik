@@ -8,6 +8,8 @@ from flask_cors import CORS
 
 from data import load_split, LANGUAGES, LABELS
 from model import Ensemble
+from translate import translate as translate_text
+from explain import trigger_words
 
 DATA_DIR = os.environ.get("VOXAFRIK_DATA", "data/afrihate")
 AUGMENT_PATH = os.environ.get("VOXAFRIK_AUGMENT", "augment.csv")
@@ -61,6 +63,43 @@ def sample():
             "tokens": [],
         })
     return jsonify(results)
+
+
+@app.route("/score", methods=["POST"])
+def score():
+    payload = request.get_json()
+    texts_in = payload["texts"] if "texts" in payload else [payload["text"]]
+    results = []
+    for proba in model.predict_proba(texts_in):
+        label = int(proba.argmax())
+        results.append({"category": LABELS[label], "confidence": round(float(proba[label]), 2), "isToxic": label != 0})
+    return jsonify(results)
+
+
+@app.route("/explain", methods=["POST"])
+def explain_route():
+    text = str(request.get_json()["text"])
+    proba = model.predict_proba([text])[0]
+    label = int(proba.argmax())
+    try:
+        english = translate_text(text, "en")
+    except Exception:
+        english = ""
+    return jsonify({
+        "category": LABELS[label],
+        "confidence": round(float(proba[label]), 2),
+        "translation": english,
+        "tokens": [{"name": item["word"], "w": item["weight"]} for item in trigger_words(model, text)],
+    })
+
+
+@app.route("/translate", methods=["POST"])
+def translate_route():
+    payload = request.get_json()
+    try:
+        return jsonify({"text": translate_text(payload["text"], payload.get("target", "en"), payload.get("source", "auto"))})
+    except Exception as error:
+        return jsonify({"text": "", "error": str(error)})
 
 
 if __name__ == "__main__":
