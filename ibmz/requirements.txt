@@ -1,0 +1,4 @@
+# Extra dependency for the optional Granite layer on the Telum accelerator.
+# On IBM Z, install a llama-cpp-python built against the GGML zDNN backend so that
+# n_gpu_layers offloads to the Telum II NNPA. See ibmz/README.md.
+llama-cpp-python
