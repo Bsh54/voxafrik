@@ -59,6 +59,16 @@ for, so this layer runs on the accelerator through the GGML zDNN backend. See
 the model size we had access to, and [docs/platform_evidence.md](docs/platform_evidence.md)
 for captured proof that it all runs on an IBM Z (s390x) machine with the Telum accelerator.
 
+The machine is an IBM Z (s390x), machine type 9175, whose CPU exposes the `nnpa` feature
+of the Telum accelerator:
+
+![IBM Z host: s390x, machine 9175, nnpa feature](docs/images/ibm-z-s390x.png)
+
+IBM Granite initialises the zDNN backend and runs on that accelerator (`ggml_zdnn_init:
+found 1 device`, `NNPA name: zDNN`):
+
+![IBM Granite running on the Telum accelerator through zDNN](docs/images/telum-accelerator.png)
+
 ## The data
 
 We train and evaluate on **AfriHate** (Muhammad et al., NAACL 2025), a human-annotated
