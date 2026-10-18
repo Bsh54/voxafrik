@@ -44,7 +44,8 @@ writes a short natural-language reason for the moderator. Text generation is hea
 matrix multiplication, which is the workload the Telum II on-chip AI accelerator is built
 for, so this layer runs on the accelerator through the GGML zDNN backend. See
 [ibmz/README.md](ibmz/README.md) for how we reached the accelerator and an honest note on
-the model size we had access to.
+the model size we had access to, and [docs/platform_evidence.md](docs/platform_evidence.md)
+for captured proof that it all runs on an IBM Z (s390x) machine with the Telum accelerator.
 
 ## The data
 
