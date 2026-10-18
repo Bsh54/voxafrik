@@ -22,6 +22,8 @@ Two things matter here. The architecture is `s390x` (IBM Z, not x86), and the CP
 list contains `nnpa`, the instruction set of the Telum on-chip AI accelerator. Machine
 type 9175 is an IBM z17 / Telum II class system.
 
+![IBM Z host: s390x, machine 9175, nnpa feature, in the LinuxONE JupyterLab terminal](images/ibm-z-s390x.png)
+
 ## Containerisation
 
 The work runs inside an IBM-provided JupyterLab container pulled from the LinuxONE
@@ -59,6 +61,8 @@ zDNN : NNPA = 1 | NNPA_PARMBLKFORMAT_0 = 1 | NNPA_PARMBLKFORMAT_1 = 1 | CPU : LL
 The `ggml_zdnn_init: found 1 device` and `NNPA name: zDNN` lines are the confirmation that
 the generative layer executes on the Telum accelerator. Reproduce with
 [../ibmz/granite_telum.py](../ibmz/granite_telum.py).
+
+![IBM Granite initialising the zDNN backend and running on the Telum accelerator](images/telum-accelerator.png)
 
 ## The real-time classifier on the s390x CPU
 

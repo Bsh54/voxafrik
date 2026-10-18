@@ -28,6 +28,18 @@ VoxAfrik reads a stream of posts, and for each post it does three things:
 
 The design rule is simple: the model triages and explains, and a person always decides.
 
+## The console
+
+The moderation console screens a live stream. Clean posts pass through and flagged posts
+slide into the queue on the right, with per-language counters on the left.
+
+![VoxAfrik moderation console screening a live multilingual stream](docs/images/console-live-stream.png)
+
+Opening a flagged post shows the moderator the English translation, the predicted class
+and confidence, and the words that triggered the decision, then hands off to human review.
+
+![Message inspector with translation, trigger words and a send-to-human-review action](docs/images/console-human-review.png)
+
 ## How it works
 
 VoxAfrik has two layers, and each one runs on the part of the IBM Z chip that suits it.
