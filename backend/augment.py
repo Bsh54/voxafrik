@@ -1,6 +1,10 @@
 """Generate and translate synthetic examples so the model also handles clean, formal input."""
 import csv
+import os
 from translate import translate
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DEFAULT_OUTPUT = os.path.join(ROOT, "augment.csv")
 
 LANGUAGES = ["sw", "ha", "ig", "rw", "yo"]
 
@@ -78,4 +82,4 @@ def build(output_path):
 
 
 if __name__ == "__main__":
-    print("saved", build("augment.csv"), "rows")
+    print("saved", build(os.environ.get("VOXAFRIK_AUGMENT", DEFAULT_OUTPUT)), "rows")

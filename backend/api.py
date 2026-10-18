@@ -11,9 +11,10 @@ from model import Ensemble
 from translate import translate as translate_text
 from explain import trigger_words
 
-DATA_DIR = os.environ.get("VOXAFRIK_DATA", "data/afrihate")
-AUGMENT_PATH = os.environ.get("VOXAFRIK_AUGMENT", "augment.csv")
-FRONTEND_DIR = os.environ.get("VOXAFRIK_FRONTEND", os.path.join(os.path.dirname(__file__), "..", "frontend"))
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_DIR = os.environ.get("VOXAFRIK_DATA", os.path.join(ROOT, "data", "afrihate"))
+AUGMENT_PATH = os.environ.get("VOXAFRIK_AUGMENT", os.path.join(ROOT, "augment.csv"))
+FRONTEND_DIR = os.environ.get("VOXAFRIK_FRONTEND", os.path.join(ROOT, "frontend"))
 
 train = load_split(DATA_DIR, "train")
 test = load_split(DATA_DIR, "test")

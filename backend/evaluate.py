@@ -1,8 +1,12 @@
 """Evaluate the ensemble per language on the official AfriHate test splits."""
+import os
 import sys
 from sklearn.metrics import accuracy_score, f1_score, recall_score
 from data import load_split, LANGUAGES
 from model import Ensemble
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DEFAULT_DATA_DIR = os.path.join(ROOT, "data", "afrihate")
 
 
 def main(base_dir):
@@ -21,4 +25,4 @@ def main(base_dir):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1] if len(sys.argv) > 1 else "data/afrihate")
+    main(sys.argv[1] if len(sys.argv) > 1 else os.environ.get("VOXAFRIK_DATA", DEFAULT_DATA_DIR))
