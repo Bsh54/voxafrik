@@ -18,3 +18,23 @@ looking at — hateful, abusive, or normal — with the words that drove the dec
 and an English translation. The model triages and explains; a person always decides.
 
 Supported languages: Swahili, Hausa, Igbo, Kinyarwanda, Yoruba.
+
+## Quick start
+
+```bash
+pip install -r requirements.txt
+python scripts/download_data.py      # AfriHate train/test splits
+python backend/augment.py            # optional: broaden clean-input coverage
+python backend/api.py                # serves the API and console on :7070
+```
+
+Open `http://localhost:7070` and press **Start**.
+
+## Project structure
+
+```
+backend/   model, explanation, translation, augmentation, API
+frontend/  real-time moderation console
+scripts/   environment setup, data download, reverse proxy
+docs/      architecture, results, responsible AI
+```
