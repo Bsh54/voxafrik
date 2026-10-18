@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.env
+*.pem
+*.key
+data/
+*.parquet
+*.csv
+*.tsv
+*.gguf
+models/
+.cache/
+.DS_Store
+*.log
