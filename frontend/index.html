@@ -231,7 +231,7 @@
   const LK={swahili:'swa',hausa:'hau',igbo:'ibo',kinyarwanda:'kin',yoruba:'yor'};
   function langKey(d){d=(d||'').toLowerCase();for(const k in LK){if(d.includes(k))return LK[k];}return null;}
   function bumpLang(dialect,toxic){const k=langKey(dialect);if(!k)return;const e=document.getElementById('lang-'+k);if(e)e.textContent=(+e.textContent+1);if(toxic){const fe=document.getElementById('lang-'+k+'-f');if(fe)fe.textContent=(+fe.textContent+1);}}
-  function updateTiles(lat){ mScreened.textContent=simScreened.toLocaleString(); mFlagged.textContent=simFlagged.toLocaleString(); mFlaggedPct.textContent=simScreened?Math.round(simFlagged/simScreened*100)+'%':'0%'; mAccuracy.textContent=simScreened?(simCorrect/simScreened*100).toFixed(1):'—'; mThroughput.textContent=Math.round(25700+(Math.random()*600-300)).toLocaleString(); if(lat) mLatency.textContent=lat; }
+  function updateTiles(lat){ mScreened.textContent=simScreened.toLocaleString(); mFlagged.textContent=simFlagged.toLocaleString(); mFlaggedPct.textContent=simScreened?Math.round(simFlagged/simScreened*100)+'%':'0%'; mAccuracy.textContent=simScreened?(simCorrect/simScreened*100).toFixed(1):'0.0'; mThroughput.textContent=Math.round(25700+(Math.random()*600-300)).toLocaleString(); if(lat) mLatency.textContent=lat; }
   
   const metricClean = document.getElementById('clean-counter');
   const speedButtons = document.querySelectorAll('.speed-btn');
