@@ -38,3 +38,24 @@ frontend/  real-time moderation console
 scripts/   environment setup, data download, reverse proxy
 docs/      architecture, results, responsible AI
 ```
+
+## Results
+
+On the official AfriHate test splits the ensemble reaches **81.3% accuracy** and
+**0.787 macro-F1**. Full per-language numbers and the augmentation study are in
+[docs/results.md](docs/results.md).
+
+## Running on IBM Z
+
+The real-time classifier runs on the s390x CPU; the generative reasoning layer
+(IBM Granite) runs on the Telum II on-chip AI accelerator. See
+[docs/architecture.md](docs/architecture.md).
+
+## Responsible AI
+
+Three classes instead of a binary, per-language metrics, and a human in the loop on
+every decision. See [docs/responsible_ai.md](docs/responsible_ai.md).
+
+## License
+
+MIT — see [LICENSE](LICENSE). Dataset: AfriHate (Muhammad et al., NAACL 2025).
