@@ -4,6 +4,8 @@ Real-time hate-speech moderation for African languages, running on IBM LinuxONE.
 
 Team **SAUTILAB**, IBM Z Datathon 2026.
 
+**Live demo: https://voxafrik.shadrakbessanh.me**
+
 ## The problem
 
 Post something hateful in English and a platform's automated system usually catches it.
