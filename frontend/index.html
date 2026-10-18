@@ -356,11 +356,14 @@
     }
     for (let i = activeNodes.length - 1; i >= 0; i--) {
       const node = activeNodes[i];
-      node.y += RISE * dt * streamSpeed;
-      if (node.flagged) { node.slideX = (node.slideX||0) + 0.9 * dt * streamSpeed; node.el.style.opacity = String(Math.max(0, 1 - node.slideX/340)); } node.el.style.transform = 'translateY(' + (-node.y) + 'px)' + (node.flagged ? ' translateX(' + node.slideX + 'px)' : '');
+      if (isStreamRunning) {
+        node.y += RISE * dt * streamSpeed;
+        if (node.flagged) { node.slideX = (node.slideX||0) + 0.9 * dt * streamSpeed; node.el.style.opacity = String(Math.max(0, 1 - node.slideX/340)); }
+      }
+      node.el.style.transform = 'translateY(' + (-node.y) + 'px)' + (node.flagged ? ' translateX(' + node.slideX + 'px)' : '');
       const cardH = node.el.offsetHeight || 80;
       const cardCenter = node.y + cardH / 2;
-      if (!node.scanned && Math.abs(cardCenter - ch / 2) < 28) {
+      if (isStreamRunning && !node.scanned && Math.abs(cardCenter - ch / 2) < 28) {
         node.scanned = true;
         node.el.classList.add('ring-2', 'ring-primary-container', 'shadow-[0_0_24px_rgba(0,229,255,0.8)]');
         if (!simT0) simT0 = performance.now(); simScreened++; if (node.isToxic) simFlagged++; if (Math.random() < 0.81) simCorrect++; updateTiles((0.037 + Math.random() * 0.008).toFixed(3)); bumpLang(node.data.dialect, node.isToxic);
@@ -409,7 +412,7 @@
     } else {
       toggleIcon.textContent = 'play_arrow';
       toggleText.textContent = 'Start stream';
-      toggleBtn.className = "flex items-center gap-space-xs bg-primary-container hover:bg-surface-tint text-on-primary-container px-space-lg py-space-sm rounded font-label-lg text-label-lg font-bold shadow-[0_0_16px_rgba(0,229,255,0.4)] transition-all voxblink";
+      toggleBtn.className = "flex items-center gap-space-xs bg-primary-container hover:bg-surface-tint text-on-primary-container px-space-lg py-space-sm rounded font-label-lg text-label-lg font-bold shadow-[0_0_16px_rgba(0,229,255,0.4)] transition-all";
     }
   });
 
